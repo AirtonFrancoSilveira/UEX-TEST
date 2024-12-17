@@ -46,4 +46,45 @@ class ContactController extends Controller
         ]);
     }
 
+    public function update(Request $request, $id)
+    {
+        try {
+            $data = $request->validate([
+                'name' => 'sometimes|required|string|max:255',
+                'cpf' => 'sometimes|required|cpf',
+                'phone' => 'sometimes|required|string|max:15',
+                'cep' => 'sometimes|required|string|max:10',
+                'address' => 'sometimes|required|string|max:255',
+            ]);
+
+            $contact = $this->contactService->updateContact($id, $data);
+
+            return response()->json([
+                'message' => 'Contato atualizado com sucesso!',
+                'data' => $contact
+            ], 200);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => $e->getMessage()
+            ], 422);
+        }
+    }
+
+    public function destroy($id): JsonResponse
+    {
+        try {
+            $this->contactService->deleteContact($id);
+
+            return response()->json([
+                'message' => 'Contato deletado com sucesso!',
+            ], 200);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => 'Erro ao deletar o contato: ' . $e->getMessage()
+            ], 422);
+        }
+    }
+
 }

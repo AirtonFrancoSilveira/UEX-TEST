@@ -37,4 +37,19 @@ class ContactRepository
 
         return $query->orderBy('name', 'asc')->paginate($perPage);
     }
+
+    public function update($id, array $data)
+    {
+        $contact = Contact::findOrFail($id);
+        $contact->update($data);
+        return $contact;
+    }
+
+    public function delete($id)
+    {
+        $contact = Contact::findOrFail($id);
+        $contact->delete();
+        return $contact;
+    }
+
 }

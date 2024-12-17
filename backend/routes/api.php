@@ -14,3 +14,11 @@ Route::middleware('auth:api')->group(function () {
 Route::middleware('auth:api')->group(function () {
     Route::get('/contacts', [ContactController::class, 'index']);
 });
+Route::middleware('auth:api')->group(function () {
+    Route::put('/contacts/{id}', [ContactController::class, 'update']);
+});
+Route::middleware('auth:api')->group(function () {
+    Route::delete('/contacts/{id}', [ContactController::class, 'destroy']);
+});
+
+

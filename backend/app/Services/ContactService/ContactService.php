@@ -41,4 +41,20 @@ class ContactService
     {
         return $this->contactRepository->getAllWithFilters($filters, $perPage);
     }
+
+    public function updateContact($id, $data)
+    {
+        if (!empty($data['cpf']) && Contact::where('cpf', $data['cpf'])->where('id', '!=', $id)->exists()) {
+            throw new \Exception('O CPF informado já está cadastrado em outro contato.');
+        }
+
+        return $this->contactRepository->update($id, $data);
+    }
+
+    public function deleteContact($id)
+    {
+        return $this->contactRepository->delete($id);
+    }
+
+
 }
