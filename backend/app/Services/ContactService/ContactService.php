@@ -34,6 +34,20 @@ class ContactService
 
         $data['address'] = $cepData['logradouro'] ?? 'Endereço não encontrado';
 
+        $addressEncoded = urlencode($data['address']);
+        $googleResponse = Http::withOptions(['verify' => false])->get("https://maps.googleapis.com/maps/api/geocode/json", [
+            'address' => $addressEncoded,
+            'key' => env('GOOGLE_MAPS_API_KEY'),
+        ]);
+
+        if ($googleResponse->failed() || empty($googleResponse['results'])) {
+            throw new \Exception('Não foi possível obter as coordenadas geográficas.');
+        }
+
+        $location = $googleResponse['results'][0]['geometry']['location'];
+        $data['latitude'] = $location['lat'];
+        $data['longitude'] = $location['lng'];
+
         return $this->contactRepository->create($data);
     }
 

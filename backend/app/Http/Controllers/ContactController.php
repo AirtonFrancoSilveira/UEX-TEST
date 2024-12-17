@@ -24,7 +24,7 @@ class ContactController extends Controller
 
             return response()->json([
                 'message' => 'Contato cadastrado com sucesso!',
-                'data' => $contact
+                'data' => $contact->toArray()
             ], 201);
 
         } catch (\Exception $e) {
