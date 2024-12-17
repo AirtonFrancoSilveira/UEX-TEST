@@ -36,8 +36,9 @@ class ContactController extends Controller
 
     public function index(Request $request): JsonResponse
     {
+        $filters = $request->only(['name', 'cpf']);
         $perPage = $request->get('per_page', 10);
-        $contacts = $this->contactService->getContacts($perPage);
+        $contacts = $this->contactService->getContacts($filters, $perPage);
 
         return response()->json([
             'message' => 'Contatos listados com sucesso!',

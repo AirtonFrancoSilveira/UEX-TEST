@@ -37,8 +37,8 @@ class ContactService
         return $this->contactRepository->create($data);
     }
 
-    public function getContacts($perPage = 10)
+    public function getContacts($filters = [], $perPage = 10)
     {
-        return $this->contactRepository->getAllWithPagination($perPage);
+        return $this->contactRepository->getAllWithFilters($filters, $perPage);
     }
 }
