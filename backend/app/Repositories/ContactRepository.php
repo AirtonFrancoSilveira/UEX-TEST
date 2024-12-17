@@ -17,4 +17,9 @@ class ContactRepository
     {
         return $this->contact->create($data);
     }
+
+    public function getAllWithPagination($perPage = 10)
+    {
+        return $this->contact->orderBy('name', 'asc')->paginate($perPage);
+    }
 }

@@ -11,3 +11,6 @@ Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:api'
 Route::middleware('auth:api')->group(function () {
     Route::post('/contacts', [ContactController::class, 'store']);
 });
+Route::middleware('auth:api')->group(function () {
+    Route::get('/contacts', [ContactController::class, 'index']);
+});

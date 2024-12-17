@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ContactRequest;
 use App\Services\ContactService\ContactService;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+
 
 class ContactController extends Controller
 {
@@ -17,13 +19,30 @@ class ContactController extends Controller
 
     public function store(ContactRequest $request)
     {
-        // Validação dos dados e criação do contato
-        $contact = $this->contactService->createContact($request->validated());
+        try {
+            $contact = $this->contactService->createContact($request->validated());
 
-        // Resposta JSON forçada
-        return response()->json([
-            'message' => 'Contato cadastrado com sucesso!',
-            'data' => $contact
-        ], 201);
+            return response()->json([
+                'message' => 'Contato cadastrado com sucesso!',
+                'data' => $contact
+            ], 201);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => $e->getMessage()
+            ], 422);
+        }
     }
+
+    public function index(Request $request): JsonResponse
+    {
+        $perPage = $request->get('per_page', 10);
+        $contacts = $this->contactService->getContacts($perPage);
+
+        return response()->json([
+            'message' => 'Contatos listados com sucesso!',
+            'data' => $contacts
+        ]);
+    }
+
 }
