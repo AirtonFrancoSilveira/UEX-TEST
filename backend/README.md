@@ -12,6 +12,7 @@ Certifique-se de ter os seguintes itens instalados em sua máquina:
 - Node.js (opcional, para desenvolvimento frontend, se aplicável)
 - Banco de dados SQLite (ou outro configurado no `.env`)
 - Servidor SMTP para envio de e-mails (pode usar Gmail, Mailtrap, etc.)
+- **API do Google Maps habilitada** (para obter latitude e longitude de endereços)
 
 ---
 
@@ -67,6 +68,13 @@ Certifique-se de ter os seguintes itens instalados em sua máquina:
      MAIL_FROM_ADDRESS=seuemail@gmail.com
      MAIL_FROM_NAME="Nome do Sistema"
      ```
+
+   - **Google Maps API Key:**
+     ```env
+     GOOGLE_MAPS_API_KEY=sua_chave_api
+     ```
+
+     > **Nota:** Certifique-se de habilitar a API do Google Maps na [Google Cloud Console](https://console.cloud.google.com/) e gerar a chave de API.
 
 4. **Gere a Chave JWT**
 
@@ -204,26 +212,6 @@ Para executar os testes:
 ```bash
 php artisan test
 ```
-
----
-
-## **Contribuição**
-1. Faça um fork do repositório.
-2. Crie uma branch para suas alterações:
-   ```bash
-   git checkout -b minha-feature
-   ```
-3. Commit suas alterações:
-   ```bash
-   git commit -m "Minha nova feature"
-   ```
-4. Envie para sua branch:
-   ```bash
-   git push origin minha-feature
-   ```
-5. Abra um Pull Request.
-
----
 
 ## **Licença**
 Este projeto é licenciado sob a [MIT License](LICENSE).
