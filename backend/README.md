@@ -212,6 +212,10 @@ Para executar os testes:
 ```bash
 php artisan test
 ```
+## **Linkedin**
+https://www.linkedin.com/in/afranco-io/
 
 ## **Licença**
 Este projeto é licenciado sob a [MIT License](LICENSE).
+
+
