@@ -81,12 +81,13 @@ Contribuições são sempre bem-vindas! Sinta-se à vontade para abrir uma issue
 
 📷 Prévia do Projeto
 Login:
-
+![alt text](image.png)
 
 Cadastro:
-
+![alt text](image-1.png)
 
 Dashboard:
+![alt text](image-2.png)
 
 
 🛠️ Tecnologias Utilizadas
@@ -178,7 +179,7 @@ yarn start
 6. Acessar o Projeto
 Abra o navegador e acesse:
 
-arduino
+
 Copiar código
 http://localhost:3000
 🖥️ Prévia do Projeto
@@ -208,18 +209,7 @@ src/
 ⚙️ Backend
 O projeto depende de uma API REST que deve estar configurada para rodar localmente em http://localhost:8000/api.
 
-🤝 Contribuições
-Contribuições são sempre bem-vindas! Para contribuir:
-
-Faça um fork do projeto.
-Crie uma branch: git checkout -b minha-feature.
-Faça suas alterações e commit: git commit -m "Minha nova feature".
-Envie para o repositório remoto: git push origin minha-feature.
-Abra um Pull Request.
-📝 Licença
-Este projeto está sob a licença MIT. Consulte o arquivo LICENSE para mais informações.
-
-Desenvolvido por [Seu Nome] - GitHub
+Desenvolvido por [Airton Franco] - GitHub
 
 yaml
 Copiar código
