@@ -15,38 +15,87 @@ const DashboardPage = () => {
     address: '',
   });
   const [markers, setMarkers] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const fetchContacts = async (term = '') => {
     try {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        console.error('Token não encontrado!');
+        setLoading(false);
+        return;
+      }
+
       const response = await api.get(`/contacts?name=${term}`, {
-        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+        headers: { Authorization: `Bearer ${token}` },
       });
-      setContacts(response.data);
-      setFilteredContacts(response.data);
-      updateMarkers(response.data);
+
+      // Corrige o caminho dos dados paginados
+      if (response.data && response.data.data && Array.isArray(response.data.data.data)) {
+        const contactsList = response.data.data.data;
+        setContacts(contactsList);
+        setFilteredContacts(contactsList);
+        updateMarkers(contactsList);
+      } else {
+        console.error('Formato inesperado de dados:', response.data);
+      }
     } catch (error) {
       console.error('Erro ao buscar contatos:', error);
+    } finally {
+      setLoading(false);
     }
   };
 
   const updateMarkers = (contacts) => {
-    const newMarkers = contacts.map((contact) => ({
-      lat: parseFloat(contact.latitude),
-      lng: parseFloat(contact.longitude),
-    }));
-    setMarkers(newMarkers);
+    // Filtra somente contatos com latitude e longitude válidas
+    const newMarkers = contacts
+      .filter((contact) => contact.latitude !== null && contact.longitude !== null)
+      .map((contact) => ({
+        lat: parseFloat(contact.latitude),
+        lng: parseFloat(contact.longitude),
+        name: contact.name,
+        address: contact.address,
+      }));
+  
+    setMarkers(newMarkers); // Atualiza os marcadores no estado
   };
 
+  const formatPhoneNumber = (phone) => {
+    // Remove tudo que não for número
+    const cleaned = phone.replace(/\D/g, '');
+    // Formata no padrão "(XX) XXXXX-XXXX"
+    return cleaned.replace(/^(\d{2})(\d{5})(\d{4})$/, '($1) $2-$3');
+  };
+  
+  
   const handleAddContact = async () => {
     try {
-      await api.post('/contacts', newContact, {
-        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+      const token = localStorage.getItem('token');
+      if (!token) {
+        console.error('Token não encontrado!');
+        return;
+      }
+  
+      const payload = {
+        name: newContact.name,
+        cpf: newContact.cpf,
+        phone: formatPhoneNumber(newContact.phone), // Formata o telefone
+        cep: newContact.cep,
+        address: newContact.address,
+      };
+  
+      const response = await api.post('/contacts', payload, {
+        headers: { Authorization: `Bearer ${token}` },
       });
-      fetchContacts();
+  
+      console.log('Contato cadastrado com sucesso!', response.data);
+      fetchContacts(); // Recarrega os contatos
     } catch (error) {
-      console.error('Erro ao adicionar contato:', error);
+      console.error('Erro ao adicionar contato:', error.response?.data || error.message);
     }
   };
+  
+  
 
   const handleDeleteContact = async (id) => {
     try {
@@ -59,20 +108,19 @@ const DashboardPage = () => {
     }
   };
 
-  const handleSearch = (e) => {
-    const term = e.target.value;
-    setSearchTerm(term);
-    fetchContacts(term);
-  };
-
   useEffect(() => {
-    fetchContacts();
+    const token = localStorage.getItem('token');
+    if (!token) {
+      console.error('Token JWT ausente. Redirecionando para login...');
+      window.location.href = '/login';
+    } else {
+      fetchContacts();
+    }
   }, []);
 
   return (
     <div className="dashboard-container">
       <div className="row">
-        {/* Lista de Contatos e Formulário */}
         <div className="col-md-4 contact-list">
           <h4>Contatos</h4>
           <input
@@ -80,10 +128,12 @@ const DashboardPage = () => {
             placeholder="Buscar contato"
             className="form-control mb-2"
             value={searchTerm}
-            onChange={handleSearch}
+            onChange={(e) => {
+              setSearchTerm(e.target.value);
+              fetchContacts(e.target.value);
+            }}
           />
 
-          {/* Formulário de Cadastro */}
           <div>
             <input
               type="text"
@@ -120,29 +170,42 @@ const DashboardPage = () => {
             </button>
           </div>
 
-          {/* Lista de Contatos */}
-          <ul className="list-group">
-            {filteredContacts.map((contact) => (
-              <li key={contact.id} className="list-group-item d-flex justify-content-between align-items-center">
-                <div>
-                  <strong>{contact.name}</strong>
-                  <p className="small mb-0">{contact.address}</p>
-                </div>
-                <button className="btn btn-danger btn-sm" onClick={() => handleDeleteContact(contact.id)}>
-                  Excluir
-                </button>
-              </li>
-            ))}
-          </ul>
+          {loading ? (
+            <p>Carregando contatos...</p>
+          ) : filteredContacts.length > 0 ? (
+            <ul className="list-group">
+              {filteredContacts.map((contact) => (
+                <li key={contact.id} className="list-group-item d-flex justify-content-between align-items-center">
+                  <div>
+                    <strong>{contact.name}</strong>
+                    <p className="small mb-0">{contact.address}</p>
+                  </div>
+                  <button className="btn btn-danger btn-sm" onClick={() => handleDeleteContact(contact.id)}>
+                    Excluir
+                  </button>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p>Nenhum contato encontrado.</p>
+          )}
         </div>
 
-        {/* Mapa */}
         <div className="col-md-8">
-          <LoadScript googleMapsApiKey="AIzaSyDwGVqaa7SZIjvWFFNCm8Y7GvDrKIcDA3Y">
-            <GoogleMap mapContainerStyle={{ height: '100vh', width: '100%' }} center={{ lat: -23.55052, lng: -46.633308 }} zoom={6}>
-              {markers.map((marker, index) => (
-                <Marker key={index} position={marker} />
-              ))}
+          <LoadScript googleMapsApiKey="SEU TOKEN AQUI">
+          <GoogleMap
+            mapContainerStyle={{ height: '100vh', width: '100%' }}
+            center={{ lat: -23.55052, lng: -46.633308 }} // Localização padrão do mapa
+            zoom={6} // Zoom padrão
+            >
+            {markers.map((marker, index) => (
+                <Marker
+                key={index}
+                position={{ lat: marker.lat, lng: marker.lng }}
+                label={marker.name} // Nome do contato no marcador
+                onClick={() => alert(`Contato: ${marker.name}\nEndereço: ${marker.address}`)}
+                />
+            ))}
             </GoogleMap>
           </LoadScript>
         </div>

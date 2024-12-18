@@ -10,19 +10,20 @@ const LoginPage = () => {
 
   const handleLogin = async () => {
     try {
-      // Chamada ao backend para login
       const response = await api.post('/login', { email, password });
-
-      // Armazena o token no localStorage
-      localStorage.setItem('token', response.data.token);
-
-      // Redireciona para o Dashboard
-      navigate('/dashboard');
+      const { access_token } = response.data;
+  
+      // Salva o token no LocalStorage
+      localStorage.setItem('token', access_token);
+      console.log('Token salvo:', access_token);
+  
+      // Redireciona para o dashboard
+      window.location.href = '/dashboard';
     } catch (error) {
-      alert('Credenciais inválidas. Verifique e tente novamente.');
-      console.error(error.response?.data || error.message);
+      console.error('Erro ao fazer login:', error);
     }
   };
+  
 
   return (
     <div className="login-container d-flex justify-content-center align-items-center vh-100">
