@@ -1,70 +1,246 @@
-# Getting Started with Create React App
+# Projeto Frontend - Gerenciamento de Contatos
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Este projeto é um painel de gerenciamento de contatos integrado com o Google Maps. Ele possui funcionalidades de **login**, **cadastro de usuários** e uma tela principal para adicionar, listar, excluir contatos e visualizar suas localizações no mapa.
 
-## Available Scripts
+## 📋 Pré-requisitos
 
-In the project directory, you can run:
+Antes de iniciar, certifique-se de ter instalado as seguintes ferramentas em sua máquina:
 
-### `yarn start`
+- [Node.js](https://nodejs.org/) (v14+)
+- [NPM](https://www.npmjs.com/) ou [Yarn](https://yarnpkg.com/)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 🚀 Instalação do Projeto
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+1. **Clone o repositório**:
+   ```bash
+   git clone https://github.com/seu-usuario/nome-do-repositorio.git
+   cd nome-do-repositorio
+Instale as dependências:
 
-### `yarn test`
+bash
+Copiar código
+npm install
+# ou
+yarn install
+Configure as variáveis de ambiente:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Crie um arquivo .env na raiz do projeto com as seguintes variáveis:
 
-### `yarn build`
+bash
+Copiar código
+REACT_APP_API_URL=http://localhost:8000/api
+REACT_APP_GOOGLE_MAPS_API_KEY=YOUR_GOOGLE_MAPS_API_KEY
+Substitua YOUR_GOOGLE_MAPS_API_KEY pela chave da API do Google Maps.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Inicie o servidor de desenvolvimento:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+bash
+Copiar código
+npm start
+# ou
+yarn start
+Acesse o projeto:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+O projeto estará disponível em: http://localhost:3000
 
-### `yarn eject`
+🖥️ Funcionalidades do Projeto
+Tela de Login:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Insira seu e-mail e senha.
+Acesso ao painel de gerenciamento de contatos.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Tela de Cadastro de Usuário:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Criação de um novo usuário.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Dashboard de Contatos:
 
-## Learn More
+Adicionar, buscar e excluir contatos.
+Visualizar a localização no Google Maps.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+📂 Estrutura do Projeto
+bash
+Copiar código
+src/
+│
+├── components/           # Componentes reutilizáveis
+├── pages/                # Páginas principais (Login, Dashboard, Cadastro)
+├── services/             # Configuração de APIs (Axios)
+├── styles/               # Arquivos de estilo (CSS/SCSS)
+├── App.js                # Componente principal
+├── index.js              # Arquivo de inicialização
+└── .env                  # Variáveis de ambiente
+⚙️ Backend
+O projeto frontend está configurado para consumir uma API REST. Para configurar o backend local, certifique-se de que a API está rodando em:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+bash
+Copiar código
+http://localhost:8000/api
+🤝 Contribuições
+Contribuições são sempre bem-vindas! Sinta-se à vontade para abrir uma issue ou um pull request.
 
-### Code Splitting
+📷 Prévia do Projeto
+Login:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Analyzing the Bundle Size
+Cadastro:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-### Making a Progressive Web App
+Dashboard:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-### Advanced Configuration
+🛠️ Tecnologias Utilizadas
+React.js
+Axios
+Google Maps API
+Bootstrap
+CSS/SCSS
+🧑‍💻 Autor
+Seu Nome - Seu LinkedIn
+GitHub - Seu GitHub
+📝 Licença
+Este projeto está licenciado sob a MIT License. Consulte o arquivo LICENSE para mais informações.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+markdown
+Copiar código
 
-### Deployment
+### Imagens:
+Certifique-se de salvar as imagens fornecidas nos seguintes caminhos:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+1. **Login**: `./docs/login.png`
+2. **Cadastro**: `./docs/create-account.png`
+3. **Dashboard**: `./docs/dashboard.png`
 
-### `yarn build` fails to minify
+Se precisar de mais alguma modificação ou ajuste, estou à disposição! 😊
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+
+
+Você disse:
+preciso de um unico arquivo readme contendo o passo a passo de rodra o projeto
+O ChatGPT disse:
+ChatGPT
+Aqui está o arquivo README.md finalizado e simplificado, contendo todos os passos necessários para rodar o projeto. Esse conteúdo está pronto para ser copiado e colado no seu projeto.
+
+markdown
+Copiar código
+# 📌 Gerenciamento de Contatos com Google Maps
+
+Este projeto é um **painel de gerenciamento de contatos** que permite adicionar, listar, excluir contatos e visualizar suas localizações no **Google Maps**. Ele inclui funcionalidades de login, cadastro de usuários e painel principal.
+
+---
+
+## 🚀 Passo a Passo para Rodar o Projeto
+
+### 1. **Pré-requisitos**
+
+Certifique-se de ter instalado na sua máquina:
+
+- **Node.js** (v14+)
+- **NPM** (ou **Yarn**)
+- **Google Maps API Key** (obtenha a chave em [Google Cloud](https://console.cloud.google.com/))
+
+---
+
+### 2. **Clonar o Repositório**
+
+Abra o terminal e execute:
+
+```bash
+git clone https://github.com/seu-usuario/nome-do-repositorio.git
+cd nome-do-repositorio
+3. Instalar Dependências
+Execute o seguinte comando para instalar as dependências do projeto:
+
+bash
+Copiar código
+npm install
+# ou, se preferir usar Yarn
+yarn install
+4. Configurar Variáveis de Ambiente
+Crie um arquivo .env na raiz do projeto com as seguintes variáveis:
+
+bash
+Copiar código
+REACT_APP_API_URL=http://localhost:8000/api
+REACT_APP_GOOGLE_MAPS_API_KEY=YOUR_GOOGLE_MAPS_API_KEY
+Substitua YOUR_GOOGLE_MAPS_API_KEY pela chave da API do Google Maps.
+Certifique-se de que o backend esteja rodando em http://localhost:8000/api.
+5. Rodar o Projeto
+Inicie o servidor de desenvolvimento com:
+
+bash
+Copiar código
+npm start
+# ou
+yarn start
+6. Acessar o Projeto
+Abra o navegador e acesse:
+
+arduino
+Copiar código
+http://localhost:3000
+🖥️ Prévia do Projeto
+Tela de Login
+
+Tela de Cadastro
+
+Dashboard de Contatos
+
+🛠️ Tecnologias Utilizadas
+React.js - Biblioteca principal para a interface.
+Axios - Consumo da API REST.
+Google Maps API - Exibição do mapa com marcadores.
+Bootstrap - Estilização e layout responsivo.
+📂 Estrutura do Projeto
+bash
+Copiar código
+src/
+│
+├── components/           # Componentes reutilizáveis
+├── pages/                # Páginas (Login, Cadastro, Dashboard)
+├── services/             # Configuração do Axios
+├── styles/               # Estilos globais (CSS/SCSS)
+├── App.js                # Componente principal
+├── index.js              # Inicialização do projeto
+└── .env                  # Variáveis de ambiente
+⚙️ Backend
+O projeto depende de uma API REST que deve estar configurada para rodar localmente em http://localhost:8000/api.
+
+🤝 Contribuições
+Contribuições são sempre bem-vindas! Para contribuir:
+
+Faça um fork do projeto.
+Crie uma branch: git checkout -b minha-feature.
+Faça suas alterações e commit: git commit -m "Minha nova feature".
+Envie para o repositório remoto: git push origin minha-feature.
+Abra um Pull Request.
+📝 Licença
+Este projeto está sob a licença MIT. Consulte o arquivo LICENSE para mais informações.
+
+Desenvolvido por [Seu Nome] - GitHub
+
+yaml
+Copiar código
+
+---
+
+### **Instruções sobre as Imagens**
+1. Salve as imagens fornecidas na pasta **docs** dentro do seu projeto.
+2. Estrutura recomendada:
+docs/ ├── login.png ├── create-account.png └── dashboard.png
+
+csharp
+Copiar código
+
+Esse arquivo inclui todas as instruções necessárias para configurar e rodar o projeto pela primeira vez, além de uma prévia visual com as imagens correspondentes. Se precisar de mais alguma alteração, é só avisar! 🚀
+
+
+
+
+
+
+
+
+
