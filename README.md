@@ -33,3 +33,6 @@ Este projeto foi desenvolvido como parte de um teste técnico para avaliação d
 2. Composer
 3. Banco de Dados Relacional (MySQL ou PostgreSQL)
 4. Chave de API do Google Maps
+
+# Rodar Localmente o Backend e Front-End
+Consulte o README de cada monorepo
