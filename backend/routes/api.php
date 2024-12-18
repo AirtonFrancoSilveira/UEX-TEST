@@ -20,5 +20,8 @@ Route::middleware('auth:api')->group(function () {
 Route::middleware('auth:api')->group(function () {
     Route::delete('/contacts/{id}', [ContactController::class, 'destroy']);
 });
+Route::post('/password/email', [AuthController::class, 'sendResetLink']);
+Route::post('/password/reset', [AuthController::class, 'resetPassword']);
+
 
 
